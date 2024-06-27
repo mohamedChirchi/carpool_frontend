@@ -1,0 +1,33 @@
+<div class="cs-height_30 cs-height_lg_30 px-5"></div>
+<nav class="create-elements">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link" [routerLink]="['/driver/my-items', 'my-rides']" routerLinkActive="active">
+            My Rides
+        </button>
+        <button class="nav-link" [routerLink]="['/driver/my-items', 'requested-rides']" routerLinkActive="active">
+            Requests
+        </button>
+        <button class="nav-link" [routerLink]="['/driver/my-items', 'my-cars']" routerLinkActive="active">
+            Cars
+        </button>
+    </div>
+</nav>
+<div class="cs-height_30 cs-height_lg_30"></div>
+
+<!-- MyItemsTabsComponent template -->
+<div>
+    <!--TAB My Rides -->
+    <div *ngIf="selectedTab === 'my-rides'" [@tabAnimation]="''">
+        <app-list-driver-rides></app-list-driver-rides>
+    </div>
+
+    <!--TAB Requests -->
+    <div *ngIf="selectedTab === 'requested-rides'" [@tabAnimation]="''">
+        <app-requested-rides></app-requested-rides>
+    </div>
+
+    <!--TAB My Cars -->
+    <div *ngIf="selectedTab === 'my-cars'" [@tabAnimation]="''">
+        <app-list-cars></app-list-cars>
+    </div>
+</div>

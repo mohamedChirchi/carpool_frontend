@@ -1,0 +1,25 @@
+<div class="cs-height_30 cs-height_lg_30 px-5"></div>
+<nav class="create-elements">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link" [routerLink]="['/driver/create', 'ride']" routerLinkActive="active">
+            Ride
+        </button>
+        <button class="nav-link" [routerLink]="['/driver/create', 'car']" routerLinkActive="active">
+            Car
+        </button>
+    </div>
+</nav>
+<div class="cs-height_30 cs-height_lg_30"></div>
+
+<!-- CreateTabsComponent template -->
+<div>
+    <!--TAB ADD Rides -->
+    <div *ngIf="selectedTab === 'ride'" [@tabAnimation]="''">
+        <app-add-ride></app-add-ride>
+    </div>
+
+    <!--TAB ADD Cars -->
+    <div *ngIf="selectedTab === 'car'" [@tabAnimation]="''">
+        <app-add-car></app-add-car>
+    </div>
+</div>

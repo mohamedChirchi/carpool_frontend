@@ -1,0 +1,57 @@
+<!-- analytics.component.html -->
+
+<div class="container mt-4">
+  <h2 class="mb-4">Carpool Analytics</h2>
+
+  <div class="row">
+    <div class="col-md-6 mt-2">
+      <div class="cs-card cs-style4 cs-type1 cs-box_shadow cs-white_bg">
+        <div class="card-body">
+          <h3 class="card-title">Passenger With Most Rides</h3>
+          <p class="card-text">Full Name: {{ stats.passengerWithMostRidesFullName }}</p>
+          <p class="card-text">Phone Number: {{ stats.passengerWithMostRidesPhoneNumber }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mt-2">
+      <div class="cs-card cs-style4 cs-type1 cs-box_shadow cs-white_bg">
+        <div class="card-body">
+          <h3 class="card-title">Driver With Most Rides</h3>
+          <p class="card-text">Full Name: {{ stats.driverWithMostRidesFullName }}</p>
+          <p class="card-text">Phone Number: {{ stats.driverWithMostRidesPhoneNumber }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <div class="cs-card cs-style4 cs-type1 cs-box_shadow cs-white_bg">
+      <h3 class="card-title">Total Rides Per Year</h3>
+      <div style="display: block;">
+        <canvas baseChart
+                [datasets]="barChartDataYear"
+                [labels]="barChartLabelsYear"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [type]="lineChartType">
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <div class="cs-card cs-style4 cs-type1 cs-box_shadow cs-white_bg">
+      <h3 class="card-title">Total Rides Per Day </h3>
+      <div style="display: block;">
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [type]="lineChartType">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

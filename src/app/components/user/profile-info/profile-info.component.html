@@ -1,0 +1,51 @@
+<div class="cs-height_30 cs-height_lg_30 px-5"></div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="cs-activity_wrap cs-box_shadow cs-white_bg">
+      <h2 class="cs-section_heading cs-style1">Profile Info</h2>
+      <div class="cs-height_45 cs-height_lg_45"></div>
+      <form (ngSubmit)="updateUserProfile()" class="row" enctype="multipart/form-data">
+        <div class="col-lg-6">
+          <div class="cs-form_field_wrap">
+            <label class="cs-form_label text-light">First name</label>
+            <input type="text" class="cs-form_field cs-white_bg" placeholder="First name" [(ngModel)]="firstName" name="firstName">
+          </div>
+          <div class="cs-height_25 cs-height_lg_25"></div>
+          <div class="cs-form_field_wrap">
+            <label class="cs-form_label text-light">Last name</label>
+            <input type="text" class="cs-form_field cs-white_bg" placeholder="Last Name" [(ngModel)]="lastName" name="lastName">
+          </div>
+          <div class="cs-height_25 cs-height_lg_25"></div>
+          <div class="cs-edit_profile">
+            <div class="cs-edit_profile_right">
+              <div class="cs-edit_profile_btns">
+                <input type="file" (change)="onFileSelected($event)" name="imgUrl">
+              </div>
+              <p>Upload your image, must be .png or .jpg format</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="cs-height_0 cs-height_lg_25"></div>
+          <div class="cs-form_field_wrap">
+            <label class="cs-form_label text-light">Phone Number</label>
+            <input type="text" class="cs-form_field cs-white_bg" placeholder="Phone number" [(ngModel)]="phoneNumber" name="phoneNumber">
+          </div>
+          <div class="cs-height_25 cs-height_lg_25"></div>
+          <div class="cs-form_field_wrap">
+            <label class="cs-form_label text-light">Address</label>
+            <input type="text" class="cs-form_field cs-white_bg" placeholder="Address" [(ngModel)]="address" name="address">
+          </div>
+          <div class="cs-height_25 cs-height_lg_25"></div>
+        </div>
+        <div class="col-lg-12">
+          <div class="cs-height_40 cs-height_lg_5"></div>
+          <button type="submit" class="cs-btn cs-style1 cs-btn_lg" [disabled]="!firstName || !lastName || !phoneNumber || !address">
+            <span>Update Profile</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="cs-height_100 cs-height_lg_70"></div>

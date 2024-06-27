@@ -1,0 +1,83 @@
+<!-- Content -->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="cs-activity_wrap cs-box_shadow cs-white_bg">
+      <h2 class="cs-section_heading cs-style1">My Rides</h2>
+      <div class="cs-height_45 cs-height_lg_45"></div>
+      <ul class="cs-activity_list cs-mp0">
+        <li class="cs-activity_list cs-mp0" *ngFor="let ride of driverRides; let i = index">
+          <div class="cs-activity cs-gray_bg">
+            <div class="cs-activity_avatar">
+              <div *ngIf="ride.status === 'ACTIVE'">
+                <img src="assets/img/status_ride/active.png" alt="ACTIVE">
+                <div style="text-align: center;">
+                  ACTIVE
+                </div>
+              </div>
+              <div *ngIf="ride.status === 'COMPLETED'">
+                <img src="assets/img/status_ride/completed.png" alt="COMPLETED">
+                <div style="text-align: center;">
+                  COMPLETED
+                </div>
+              </div>
+              <div *ngIf="ride.status === 'CANCELED'">
+                <img src="assets/img/status_ride/cancelled.png" alt="CANCELED">
+                <div style="text-align: center;">
+                  CANCELED
+                </div>
+              </div>
+            </div>
+            <div class="cs-activity_right parent-div">
+              <div class="child-div">
+                <div class="label">Departure</div>
+                <div class="text">{{ ride.departureLocation }}</div>
+              </div>
+              <div class="child-div">
+                <div class="label">Destination</div>
+                <div class="text">{{ ride.destinationLocation }}</div>
+              </div>
+              <div class="child-div">
+                <div class="label">Price</div>
+                <div class="text">{{ ride.price }}</div>
+              </div>
+              <div class="child-div">
+                <div class="label">Passengers</div>
+                <div class="text">{{ride.carAvailableSeats}}/{{ride.carSeats}}</div>
+              </div>
+              <div class="child-div">
+                <div class="label">Used Car</div>
+                <div class="text">{{ ride.carBrand }}, {{ ride.carModel }}</div>
+              </div>
+              <div class="child-div">
+                <div class="label">Departure Date</div>
+                <div class="text">{{ ride.departureDate | date : "short" }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="cs-height_30 cs-height_lg_30"></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="cs-height_50 cs-height_lg_40"></div>
+<!-- Pagination -->
+<div class="clearfix">
+  <ul class="pagination">
+    <li class="page-item">
+      <button (click)="previousPage()" class="page-link">
+        Previous
+      </button>
+    </li>
+    <li *ngFor="let number of pages" class="page-item" [ngClass]="{ 'page-item active': currentPage == number }">
+      <button (click)="goToPage(number)" class="page-link">
+        {{ number }}
+      </button>
+    </li>
+    <li class="page-item">
+      <button [disabled]="currentPage >= totalPages" (click)="nextPage()" class="page-link">
+        Next
+      </button>
+    </li>
+  </ul>
+</div>

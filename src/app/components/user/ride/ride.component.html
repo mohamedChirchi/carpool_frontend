@@ -1,0 +1,147 @@
+<div *ngIf="!authService.isLoggedIn">
+  <app-header></app-header>
+</div>
+<div [ngClass]="authService.isLoggedIn ?'a':'loggedIn'">
+  <div class="cs-height_30 cs-height_lg_70"></div>
+  <div class="cs-sidebar_frame cs-style1">
+    <div class="cs-sidebar_frame_right">
+      <form [formGroup]="rideFilterForm">
+        <div class="cs-filter_head">
+          <div class="cs-filter_head_left">
+            <span class="cs-search_result cs-medium cs-ternary_color">Location: </span>
+            <div class="cs-form_field_wrap">
+              <input class="cs-form_field cs-field_sm" placeholder="Departure" formControlName="departure" type="text"
+                id="departure" name="departure">
+            </div>
+            <div class="cs-form_field_wrap">
+              <input class="cs-form_field cs-field_sm" placeholder="Destination" formControlName="destination"
+                type="text" id="destination" name="destination">
+            </div>
+            <span class="cs-search_result cs-medium cs-ternary_color">Price: </span>
+            <div class="cs-form_field_wrap">
+              <input class="cs-form_field cs-field_sm" placeholder="Min" formControlName="minPrice" type="number"
+                id="minPrice" name="minPrice">
+            </div>
+            <div class="cs-form_field_wrap">
+              <input class="cs-form_field cs-field_sm" placeholder="Max" formControlName="maxPrice" type="number"
+                id="maxPrice" name="maxPrice">
+            </div>
+            <span class="cs-search_result cs-medium cs-ternary_color"> | </span>
+            <div class="cs-form_field_wrap cs-select_arrow">
+              <select formControlName="status" class="cs-form_field cs-field_sm" id="status" name="status">
+                <option value="" selected>Status</option>
+                <option value="ACTIVE">Active</option>
+                <option value="CANCELED">Canceled</option>
+                <option value="COMPLETED">Completed</option>
+              </select>
+            </div>
+            <span class="cs-search_result cs-medium cs-ternary_color"> | </span>
+            <div class="cs-form_field_wrap">
+              <button class="cs-btn cs-style1 cs-btn_sm" (click)="getFiltredRide()"><span>Apply</span></button>
+              <input type="reset" class="cs-btn cs-style1 cs-color1 cs-btn_sm" value="Clear">
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="cs-height_30 cs-height_lg_30"></div>
+      <div *ngIf="!rides">Loading...</div>
+      <div *ngIf="rides">
+        <div class="row">
+          <div class="col-lg-3 col-sm-6" *ngFor="let ride of rides ;let i=index">
+            <div class="cs-slider_wrapper">
+              <div class="cs-slide">
+                <div class="cs-card cs-style4 cs-type1 cs-box_shadow cs-white_bg">
+                  <span class="cs-card_like cs-primary_color">
+                    <i class="far fa-star fa-fw"></i>
+                    3.4/5
+                  </span>
+                  <a href="#" class="cs-card_thumb cs-zoom_effect">
+                    <img [src]="ride.driverImageUrl" alt="Image" class="cs-zoom_item" width="350" height="280">
+                  </a>
+                  <div class="cs-card_info">
+                    <a href="#" class="cs-avatar cs-white_bg">
+                      <div class="cs-avatar_images">
+                        <ng-container
+                          *ngFor="let i of [].constructor(ride.carSeats - ride.carAvailableSeats); let j = index">
+                          <img src="assets/img/avatar/registred.png" alt="Avatar">
+                        </ng-container>
+
+                        <ng-container *ngFor="let i of [].constructor(ride.carAvailableSeats); let j = index">
+                          <img src="assets/img/avatar/waiting.png" alt="Avatar">
+                        </ng-container>
+                      </div>
+                      <span>{{ ride.carAvailableSeats }}/{{ ride.carSeats }}<span>places</span></span>
+                    </a>
+                    <div class="cs-height_10 cs-height_lg_10"></div>
+                    <div class="cs-countdown" [attr.data-countdate]="ride.departureDate">
+                      <div class="cs-countdown_item">
+                        <div class="cs-countdown_number">
+                          <div class="cs-count_days">{{ ride.countdown.days }}</div>
+                        </div>
+                        <h3 class="cs-countdown_text">Days</h3>
+                      </div>
+                      <div class="cs-countdown_item">
+                        <div class="cs-countdown_number">
+                          <div class="cs-count_hours">{{ ride.countdown.hours  }}</div>
+                        </div>
+                        <h3 class="cs-countdown_text">Hours</h3>
+                      </div>
+                      <div class="cs-countdown_item">
+                        <div class="cs-countdown_number">
+                          <div class="cs-count_minutes">{{ ride.countdown.minutes  }}</div>
+                        </div>
+                        <h3 class="cs-countdown_text">Mins</h3>
+                      </div>
+                      <div class="cs-countdown_item">
+                        <div class="cs-countdown_number">
+                          <div class="cs-count_seconds">{{ ride.countdown.seconds  }}</div>
+                        </div>
+                        <h3 class="cs-countdown_text">Sec</h3>
+                      </div>
+                    </div>
+                    <h3 class="cs-card_title">{{ ride.departureLocation }} to {{ ride.destinationLocation }}
+                    </h3>
+                    <div class="cs-card_price"><b class="cs-primary_color">Price:</b> {{ ride.price }}
+                    </div>
+                    <hr>
+                    <div class="cs-card_footer">
+                      <span class="cs-card_btn_1" data-modal="#history_1" (click)="request(ride.id)">
+                        <i class="fas fa-info"></i> View Details
+                      </span>
+                      <span class="cs-card_btn_2" data-modal="#bid_1"
+                        (click)="request(ride.id)"><span>Join</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cs-height_30 cs-height_lg_30"></div>
+          </div><!-- .col -->
+        </div>
+      </div>
+      <div class="cs-height_50 cs-height_lg_40"></div>
+      <!-- Pagination -->
+      <div class="clearfix">
+        <ul class="pagination">
+          <li class="page-item">
+            <button (click)="previousPage()" class="page-link">
+              Previous
+            </button>
+          </li>
+
+          <li *ngFor="let number of pages" class="page-item" [ngClass]="{ 'page-item active': currentPage == number }">
+            <button (click)="goToPage(number)" class="page-link">
+              {{ number }}
+            </button>
+          </li>
+
+          <li class="page-item">
+            <button [disabled]="currentPage >= totalPages" (click)="nextPage()" class="page-link">
+              Next
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

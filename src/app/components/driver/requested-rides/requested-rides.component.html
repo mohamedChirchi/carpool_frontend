@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="cs-activity_wrap cs-box_shadow cs-white_bg">
+      <h2 class="cs-section_heading cs-style1">Request from passengers</h2>
+      <div class="cs-height_45 cs-height_lg_45"></div>
+      <ul class="cs-activity_list cs-mp0">
+        <li *ngFor="let ride of rides ;let i=index">
+          <div class="cs-activity cs-gray_bg">
+            <div class="cs-activity_avatar"><img src="{{ ride.passengerImageUrl }}" alt=""></div>
+            <div class="cs-activity_right">
+              <p class="cs-activity_text">Departure: <span>{{ ride.departureLocation }} </span> | Destination <span>{{
+                  ride.destinationLocation }}</span> <b> | at {{ ride.departureDate | date:'short' }}</b></p>
+              <p class="cs-activity_posted_by">Request By <b style="color:yellowgreen">{{ ride.passengerFirstName }}
+                  {{ ride.passengerLastName }}</b>
+              </p>
+            </div>
+            <div class="cs-activity_icon cs-center cs-white_bg cs-accent_color">
+              <a [routerLink]="[]" (click)="confirm(ride.id)" title="Accept" data-toggle="tooltip"><span>
+                  <i class="fas fa-vote-yea fa-lg"></i>
+                </span>
+              </a>
+            </div>
+            <div class="cs-activity_icon cs-center cs-white_bg cs-accent_color">
+              <a [routerLink]="[]" (click)="decline(ride.id)" class="decline" title="Decline"
+                data-toggle="tooltip"><span>
+                  <i class="fas fa-window-close fa-lg"></i>
+                </span></a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="cs-height_50 cs-height_lg_40"></div>
+<!-- Pagination -->
+<div class="clearfix">
+  <ul class="pagination">
+    <li class="page-item">
+      <button (click)="previousPage()" class="page-link">
+        Previous
+      </button>
+    </li>
+
+    <li *ngFor="let number of pages" class="page-item" [ngClass]="{ 'page-item active': currentPage == number }">
+      <button (click)="goToPage(number)" class="page-link">
+        {{ number }}
+      </button>
+    </li>
+
+    <li class="page-item">
+      <button [disabled]="currentPage >= totalPages" (click)="nextPage()" class="page-link">
+        Next
+      </button>
+    </li>
+  </ul>
+</div>

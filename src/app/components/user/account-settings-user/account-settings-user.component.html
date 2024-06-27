@@ -1,0 +1,26 @@
+<div class="cs-height_30 cs-height_lg_30 px-5"></div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="cs-activity_wrap cs-box_shadow cs-white_bg">
+            <h2 class="cs-section_heading cs-style1">Update your password</h2>
+            <div class="cs-height_45 cs-height_lg_45"></div>
+            <form class="row" (ngSubmit)="updatePassword()">
+                <div class="col-lg-6">
+                    <div class="cs-form_field_wrap">
+                        <input type="password" class="cs-form_field cs-white_bg" placeholder="Old password" name="currentPassword" [(ngModel)]="currentPassword">
+                    </div>
+                    <div class="cs-height_25 cs-height_lg_25"></div>
+                    <div class="cs-form_field_wrap">
+                        <input type="password" class="cs-form_field cs-white_bg" placeholder="New password" name="newPassword" [(ngModel)]="newPassword">
+                    </div>
+                    <div class="cs-height_25 cs-height_lg_25"></div>
+                    <div class="cs-form_field_wrap">
+                        <input type="password" class="cs-form_field cs-white_bg" placeholder="Confirm new password" name="confirmationPassword" [(ngModel)]="confirmationPassword">
+                    </div>
+                    <div class="cs-height_25 cs-height_lg_25"></div>
+                    <button class="cs-btn cs-style1 cs-btn_lg" type="submit"><span>Change Password</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

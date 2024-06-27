@@ -1,0 +1,44 @@
+<!-- Content -->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="cs-activity_wrap cs-box_shadow cs-white_bg">
+      <h2 class="cs-section_heading cs-style1">Available Cars</h2>
+      <div class="cs-height_45 cs-height_lg_45"></div>
+      <ul class="cs-activity_list cs-mp0">
+        <li class="cs-activity_list cs-mp0">
+          <div class="cs-activity cs-gray_bg">
+            <table class="table table-cars">
+              <thead>
+                <tr>
+                  <th>Brand</th>
+                  <th>Model</th>
+                  <th>Seats</th>
+                  <th>Color</th>
+                  <th colspan="2">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let car of cars ;let i=index">
+                  <td>{{ car.carBrand }}</td>
+                  <td>{{ car.carModel }}</td>
+                  <td>{{ car.carSeats }}</td>
+                  <td>{{ car.carColor }}</td>
+                  <td>
+                    <a [routerLink]="[]" (click)="deleteCar(car.id)" title="Edit" data-toggle="tooltip"><i
+                        class="fas fa-edit fa-lg" style="color: #d1cf95"></i></a>
+                  </td>
+                  <td>
+                    <a [routerLink]="[]" (click)="deleteCar(car.id)" class="delete" title="Delete"
+                      data-toggle="tooltip"><i class="fas fa-trash fa-lg" style="color: #910808;"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="cs-height_50 cs-height_lg_40"></div>
+<!-- Pagination -->
